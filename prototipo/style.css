@@ -1,0 +1,83 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: white;
+}
+
+a {
+    text-decoration: none;
+}
+
+nav a {
+    padding: 8px;
+    text-decoration: none;
+}
+
+nav a:hover:not(.logo) {
+    border-bottom: 2px solid midnightblue;
+}
+
+nav a:visited:not(.logo) {
+    color: midnightblue;
+}
+
+nav li {
+    display: inline-block;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0 8px 0 8px;
+}
+
+.logo {
+    color: white;
+    background-color: midnightblue;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.container {
+    display: flex;
+    padding: 8px;
+    min-height: 100%;
+}
+
+.sidebar {
+    min-width: 256px;
+    min-height: 100%;
+    display: flex;
+    background-color: white;
+}
+
+.sidebar form {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar input[type=text] {
+    border-radius: 0;
+    height: 32px;
+    border: 2px solid midnightblue;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar input[type=submit] {
+    min-width: 32px;
+    height: 32px;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    background-color: midnightblue;
+}
