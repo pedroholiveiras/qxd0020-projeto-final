@@ -1,4 +1,4 @@
-[
+const citacoes = [
     {
         "texto": "A arte de viver é a mais importante de todas as artes.",
         "obra": "A Arte de Viver",
@@ -90,3 +90,38 @@
         "pagina": "39"
     }
 ]
+
+const mainContent = document.querySelector(".citacoes");
+
+function autorbib(autor) {
+    let nomes = autor.split(" ");
+    return nomes[nomes.length - 1].toUpperCase();
+};
+
+window.onload = function() {
+    for (citacao of citacoes) {
+        citacaoDiv = document.createElement("div");
+        corpoCitacao = document.createElement("div");
+        dadosCitacao = document.createElement("div");
+        acoesCitacao = document.createElement("div");
+        acaoCopiar = document.createElement("button");
+        acaoBibTeX = document.createElement("button");
+
+        citacaoDiv.classList.add("citacao");
+        corpoCitacao.classList.add("corpo-citacao");
+        dadosCitacao.classList.add("dados-citacao");
+        acoesCitacao.classList.add("acoes-citacao");
+
+        corpoCitacao.innerHTML = citacao.texto;
+        dadosCitacao.innerHTML = ` (${autorbib(citacao.autor)}, ${citacao.ano})`;
+        acaoCopiar.innerHTML = "Texto";
+        acaoBibTeX.innerHTML = "BibTeX";
+
+        corpoCitacao.appendChild(dadosCitacao);
+        citacaoDiv.appendChild(corpoCitacao);
+        acoesCitacao.appendChild(acaoCopiar);
+        acoesCitacao.appendChild(acaoBibTeX);
+        citacaoDiv.appendChild(acoesCitacao);
+        mainContent.appendChild(citacaoDiv);
+    };
+};

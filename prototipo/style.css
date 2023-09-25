@@ -1,13 +1,14 @@
 body {
     font-family: 'Courier New', Courier, monospace;
-    background-color: #ffffff;
     margin: 0;
     padding: 0;
+    background-color: whitesmoke;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
+    box-shadow: 0px 2px 4px 0px rgba(25,25,112,0.25);
     width: 100%;
     background-color: white;
 }
@@ -47,29 +48,41 @@ nav ul {
 
 .container {
     display: flex;
-    padding: 8px;
-    min-height: 100%;
+    padding: 4px;
 }
 
 .sidebar {
-    min-width: 256px;
-    min-height: 100%;
+    width: 20%;
+    height: 100%;
+    justify-content: space-between;
     display: flex;
-    background-color: white;
+    padding: 0 4px 0 4px;
+}
+
+.separador-vertical {
+    width: 2px;
+    background-color: midnightblue;
+    margin: 20px 0 16px 8px;
 }
 
 .sidebar form {
+    display: flex;
     width: 100%;
-    padding: 0;
-    margin: 0;
+    margin-top: 0;
+}
+
+.main-content {
+    padding: 0 16px 0 16px;
+    width: 50%;
 }
 
 .sidebar input[type=text] {
     border-radius: 0;
-    height: 32px;
+    height: 28px;
     border: 2px solid midnightblue;
     padding: 0;
-    margin: 0;
+    margin-right: 4px;
+    flex: 1;
 }
 
 .sidebar input[type=submit] {
@@ -80,4 +93,55 @@ nav ul {
     border-radius: 0;
     border: none;
     background-color: midnightblue;
+}
+
+.citacao {
+    width: 100%;
+    min-height: 64px;
+    box-shadow: 0px 2px 4px 0px rgba(25,25,112,0.25);
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: white;
+}
+
+h1, h2, h3 {
+    color: midnightblue;
+}
+
+.corpo-citacao {
+    align-items: center;
+}
+
+.dados-citacao {
+    display: inline;
+}
+
+.acoes-citacao {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.acoes-citacao button {
+    min-height: 32px;
+    background-color: midnightblue;
+    border: none;
+    margin: 32px 4px 0 4px;
+    padding: 8px;
+    font-family: inherit;
+    color: white;
+    font-weight: bold;
+}
+
+.acoes-citacao button:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.area-pesquisa {
+    width: 100%;
+    background-color: white;
+    margin: 16px 0 16px 0;
+    padding: 8px;
+    height: 512px;
+    box-shadow: 0px 2px 4px 0px rgba(25,25,112,0.25);
 }
