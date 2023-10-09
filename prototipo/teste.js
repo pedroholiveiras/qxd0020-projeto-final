@@ -125,3 +125,10 @@ window.onload = function() {
         mainContent.appendChild(citacaoDiv);
     };
 };
+
+const conta = document.querySelector("#conta");
+const contaOpcoes = document.querySelector("#conta-opcoes");
+
+conta.addEventListener("click", (e) => {
+    contaOpcoes.classList.toggle("invisivel");
+});
