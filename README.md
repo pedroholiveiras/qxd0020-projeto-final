@@ -19,6 +19,10 @@ Pedro Henrique Pereira de Oliveira, 494399, Design Digital
 - Obra
 - Citação
 
+## :parrot: Diagrama relacional
+
+<img src="./citador_rel.png" alt="Diagrama relacional do Citador"/>
+
 ## :triangular_flag_on_post: Principais funcionalidades da aplicação
 
 - **Administrador** pode _criar_, _listar_, _atualizar_ e _remover_ **autores**, **obras** e **citações**
