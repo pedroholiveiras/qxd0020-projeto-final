@@ -1,0 +1,196 @@
+@media (max-width: 712px) {
+    .area-pesquisa {
+        display: none;
+    }
+    .main-content {
+        width: 100%;
+    }
+}
+
+.invisivel {
+    display: none;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+    background-color: whitesmoke;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 2px 4px 0px rgba(25,25,112,0.25);
+    width: 100%;
+    max-height: 64px;
+    background-color: white;
+}
+
+a {
+    text-decoration: none;
+}
+
+nav a {
+    padding: 8px;
+    text-decoration: none;
+    color: midnightblue;
+}
+
+nav .items > li a:hover:not(.logo) {
+    border-bottom: 2px solid midnightblue;
+}
+
+nav .active {
+    font-weight: bold;
+    border-bottom: 2px solid midnightblue;
+}
+nav a:visited:not(.logo) {
+    color: midnightblue;
+
+}
+
+nav li {
+    display: inline-block;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0 8px 0 8px;
+}
+
+.conta-opcoes {
+    margin-top: 16px;
+    position: absolute;
+    background-color: white;
+    padding: 8px;
+    min-height: 64px;
+    z-index: 1;
+    box-shadow: 0px 2px 4px 0px rgba(25,25,112,0.25);
+    right: 0;
+}
+
+.logo {
+    color: white;
+    background-color: midnightblue;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.container {
+    display: flex;
+    padding: 4px;
+}
+
+.sidebar {
+    width: 20%;
+    height: 100%;
+    justify-content: space-between;
+    display: flex;
+    padding: 0 4px 0 4px;
+}
+
+.sidebar form {
+    display: flex;
+    width: 100%;
+    margin-top: 0;
+}
+
+.main-content {
+    padding: 0 16px 0 16px;
+    width: 50%;
+}
+
+
+input[type=text] {
+    border-radius: 0;
+    width: 90%;
+    height: 28px;
+    border: 2px solid midnightblue;
+    margin: 16px;
+    flex: 1;
+}
+
+input[type=password] {
+    border-radius: 0;
+    width: 90%;
+    height: 28px;
+    border: 2px solid midnightblue;
+    margin: 16px;
+    flex: 1;
+}
+
+input[type=submit] {
+    min-width: 32px;
+    height: 32px;
+    margin: 0;
+    border-radius: 0;
+    padding: 0;
+    border: none;
+    background-color: midnightblue;
+}
+
+.citacao {
+    width: 100%;
+    min-height: 64px;
+    box-shadow: 0px 2px 4px 0px rgba(25,25,112,0.25);
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: white;
+}
+
+h1, h2, h3 {
+    color: midnightblue;
+}
+
+.corpo-citacao {
+    align-items: center;
+}
+
+.dados-citacao {
+    display: inline;
+}
+
+.acoes-citacao {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.acoes-citacao button {
+    min-height: 32px;
+    background-color: midnightblue;
+    border: none;
+    margin: 32px 4px 0 4px;
+    padding: 8px;
+    font-family: inherit;
+    color: white;
+    font-weight: bold;
+}
+
+.acoes-citacao button:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.area-pesquisa {
+    width: 100%;
+    background-color: white;
+    margin: 16px 0 16px 0;
+    padding: 8px;
+    height: 512px;
+    box-shadow: 0px 2px 4px 0px rgba(25,25,112,0.25);
+}
+
+.area-pesquisa input[type=text] {
+    width: 100%;
+}
+
+.caixa-login {
+    width: 25em;
+    background-color: white;
+    margin: auto;
+    margin-top: 64px;
+    padding: 8px;
+    height: 512px;
+    box-shadow: 0px 2px 4px 0px rgba(25,25,112,0.25);
+}

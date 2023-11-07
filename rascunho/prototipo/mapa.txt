@@ -1,0 +1,55 @@
+DESKTOP:
+    navbar:
+        esquerda:
+            nome site -> inicio (citaçoes)
+            citaçoes -> citaçoes publicas
+            autores -> autores 
+            obras -> obras
+        direita:
+            logado:
+                dropdown gerenciar conta:
+                    modo claro/escuro -> alternar
+                    citaçoes usuario -> pag citaçoes usuario
+                    configuraçoes -> modal configuraçoes
+                    deslogar -> desloga
+            não logado:
+                dropdown gerenciar conta:
+                    modo claro/escuro -> alternar
+                    logar/registrar -> alt dropdown p/ logar/registrar
+    coluna lateral esq:
+        em citacoes, autores, obras:
+            barra pesquisa:
+                input
+                botao opçoes pesquisa -> dropdown opçoes
+                botao pesquisar
+            opçoes exibiçao (alf, adicionado, assunto, popularidade, tipo etc)
+    corpo:
+        pag selecionada
+MOBILE:
+    01:
+        esquerda:
+            nome site -> inicio (citaçoes)
+        direita:
+            logado:
+                modal gerenciar conta:
+                    modo claro/escuro -> alternar
+                    citaçoes usuario -> pag citaçoes usuario
+                    citaçoes -> pag configuraçoes
+                    deslogar -> desloga
+            não logado:
+                modal gerenciar conta:
+                    modo claro/escuro -> alternar
+                    logar/registrar -> alt dropdown p/ logar/registrar
+    02:
+        citaçoes -> citaçoes publicas
+        autores -> autores
+        obras -> obras
+    03:
+        barra pesquisa:
+            input
+            botao opçoes pesquisa -> modal opçoes
+            botao pesquisar
+    04:
+        opçoes exibiçao (alf, adicionado, assunto, popularidade, tipo etc)
+    corpo:
+        pag selecionada
