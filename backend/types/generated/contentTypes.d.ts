@@ -367,7 +367,7 @@ export interface ApiAuthorAuthor extends Schema.CollectionType {
   info: {
     singularName: 'author';
     pluralName: 'authors';
-    displayName: 'author';
+    displayName: 'Author';
   };
   options: {
     draftAndPublish: true;
@@ -404,7 +404,7 @@ export interface ApiQuoteQuote extends Schema.CollectionType {
   info: {
     singularName: 'quote';
     pluralName: 'quotes';
-    displayName: 'quote';
+    displayName: 'Quote';
   };
   options: {
     draftAndPublish: true;
@@ -416,7 +416,9 @@ export interface ApiQuoteQuote extends Schema.CollectionType {
         maxLength: 512;
       }>;
     page: Attribute.Integer;
-    is_public: Attribute.Boolean;
+    is_public: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     work: Attribute.Relation<'api::quote.quote', 'manyToOne', 'api::work.work'>;
     users_permissions_user: Attribute.Relation<
       'api::quote.quote',
@@ -446,8 +448,7 @@ export interface ApiWorkWork extends Schema.CollectionType {
   info: {
     singularName: 'work';
     pluralName: 'works';
-    displayName: 'work';
-    description: '';
+    displayName: 'Work';
   };
   options: {
     draftAndPublish: true;
@@ -455,22 +456,21 @@ export interface ApiWorkWork extends Schema.CollectionType {
   attributes: {
     title: Attribute.String & Attribute.Required;
     subtitle: Attribute.String;
-    year: Attribute.Integer;
+    year: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<0>;
     publisher: Attribute.String;
     address: Attribute.String;
-    quotes: Attribute.Relation<
-      'api::work.work',
-      'oneToMany',
-      'api::quote.quote'
-    >;
     edition: Attribute.Integer;
     isbn: Attribute.UID;
-    subject: Attribute.String;
-    genre: Attribute.String;
+    subjects: Attribute.JSON;
     authors: Attribute.Relation<
       'api::work.work',
       'manyToMany',
       'api::author.author'
+    >;
+    quotes: Attribute.Relation<
+      'api::work.work',
+      'oneToMany',
+      'api::quote.quote'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

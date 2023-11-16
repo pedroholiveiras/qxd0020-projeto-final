@@ -4,8 +4,7 @@
   "info": {
     "singularName": "work",
     "pluralName": "works",
-    "displayName": "work",
-    "description": ""
+    "displayName": "Work"
   },
   "options": {
     "draftAndPublish": true
@@ -20,7 +19,9 @@
       "type": "string"
     },
     "year": {
-      "type": "integer"
+      "type": "integer",
+      "required": true,
+      "default": 0
     },
     "publisher": {
       "type": "string"
@@ -28,29 +29,26 @@
     "address": {
       "type": "string"
     },
-    "quotes": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::quote.quote",
-      "mappedBy": "work"
-    },
     "edition": {
       "type": "integer"
     },
     "isbn": {
       "type": "uid"
     },
-    "subject": {
-      "type": "string"
-    },
-    "genre": {
-      "type": "string"
+    "subjects": {
+      "type": "json"
     },
     "authors": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::author.author",
-      "mappedBy": "works"
+      "inversedBy": "works"
+    },
+    "quotes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::quote.quote",
+      "mappedBy": "work"
     }
   }
 }

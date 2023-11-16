@@ -4,7 +4,7 @@
   "info": {
     "singularName": "quote",
     "pluralName": "quotes",
-    "displayName": "quote"
+    "displayName": "Quote"
   },
   "options": {
     "draftAndPublish": true
@@ -20,7 +20,9 @@
       "type": "integer"
     },
     "is_public": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false,
+      "required": true
     },
     "work": {
       "type": "relation",
