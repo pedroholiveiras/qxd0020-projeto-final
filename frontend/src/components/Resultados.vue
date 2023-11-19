@@ -8,7 +8,7 @@
     const quotes = ref<Quote[]>([]);
 
     onMounted(async () => {
-        quotes.value = await citadorService.allQuotes();
+        quotes.value = await citadorService.getQuotes();
     })
 </script>
 
@@ -19,8 +19,8 @@
             <Card
                 :id="quote.id"
                 :content="quote.attributes.content"
-                :author="quote.attributes.work.data.attributes.authors.data[0].attributes.lname.toUpperCase()"
-                :year="quote.attributes.work.data.attributes.year"
+                :author="a"
+                :year="a"
             ></Card>
         </div>
     </div>

@@ -6,3 +6,9 @@ export type Quote = {
     year: number,
     page: number
 }
+
+export type Work = {
+    id: number,
+    title: string,
+    subtitle: string
+}

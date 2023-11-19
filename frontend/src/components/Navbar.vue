@@ -1,6 +1,5 @@
-<script>
-    import { ref } from "vue";
-     
+<script setup lang="ts">
+    import NewQuote from "@/components/NewQuote.vue";
 </script>
 
 <template>
@@ -60,58 +59,17 @@
             </ul>
         </div>
     </nav>
-    <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Nova citação</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="newQuoteContent" class="form-label">Texto</label>
-                            <textarea class="form-control" id="newQuoteContent"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="newQuotePage" class="form-label">Número da página</label>
-                            <input type="number" class="form-control" id="newQuotePage">
-                        </div>
-                        <div class="form-group">
-                            <label for="newQuoteWork">Obra</label>
-                            <select class="form-control" id="newQuoteObra">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="newQuoteIsPublic">
-                            <label class="form-check-label" for="newQuoteIsPublic">Privada</label>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <NewQuote></NewQuote>
 </template>
 
 <style>
-.navbar-brand {
-    color: white;
-    background: navy;
-    font-weight: bold !important;
-    padding-left: 8px;
-    padding-right: 8px;
-}
+    .navbar-brand {
+        color: white;
+        background: navy;
+        font-weight: bold !important;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
 
     .navbar-brand:visited {
         color: white;

@@ -1,12 +1,13 @@
 import { api } from "@/api";
 import { type Quote } from "@/types";
+import { type Work } from "@/types";
 
 class CitadorSevice {
     constructor() {}
 
-    async allQuotes(page = 1, pageSize = 24): Promise<Quote[]> {
+    async getQuotes(page = 1, pageSize = 24): Promise<Quote[]> {
         try {
-            const { data } = await api.get("/quotes?populate[work][populate][0]=authors");
+            const { data } = await api.get("/quotes");
             console.log(data.data);
             return data.data;
         } catch (e) {

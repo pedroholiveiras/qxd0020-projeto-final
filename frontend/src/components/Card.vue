@@ -1,5 +1,4 @@
 <script setup lang="ts">
-    import { baseURL } from "@api";
     import VueMarkdown from "vue-markdown-render";
 
     defineProps<{
