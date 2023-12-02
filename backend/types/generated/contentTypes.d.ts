@@ -405,6 +405,7 @@ export interface ApiQuoteQuote extends Schema.CollectionType {
     singularName: 'quote';
     pluralName: 'quotes';
     displayName: 'Quote';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -416,9 +417,6 @@ export interface ApiQuoteQuote extends Schema.CollectionType {
         maxLength: 512;
       }>;
     page: Attribute.Integer;
-    is_public: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
     work: Attribute.Relation<'api::quote.quote', 'manyToOne', 'api::work.work'>;
     users_permissions_user: Attribute.Relation<
       'api::quote.quote',
