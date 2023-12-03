@@ -7,16 +7,14 @@
 
     const props = defineProps<{
         id: number,
-        content: string,
-        page: number,
-        work: number,
-        author: string,
-        year: number
+        fname: string,
+        lname?: string,
+        fields?: object
     }>();
 
     function select(){
         stateStore.sact.value = 1;
-        stateStore.stype.value = 0;
+        stateStore.stype.value = 2;
         stateStore.sid.value = props.id;
     }
 
@@ -24,9 +22,9 @@
         select();
         stateStore.sdata.value = {
             id: props.id,
-            content: props.content,
-            page: props.page,
-            work: props.work
+            fname: props.fname,
+            lname: props.lname,
+            fields: props.fields
         };
     }
 </script>
@@ -34,13 +32,15 @@
 <template>
     <div class="card col-md-10 mx-auto mb-2">
         <div class="card-body">
-            <p class="card-text">{{ content }}</p>
-            <h6 class="card-subtitle mb-3 text-muted">({{ author }}, {{ year }})</h6>
-            <div class="d-flex">
-                <div class="me-auto" >
-                    <a href="#" class="btn btn-primary me-2">ABNT</a>
-                    <a href="#" class="btn btn-primary">bibLaTeX</a>
-                </div>
+            <div class="mb-3">
+                <span class="text-muted">Nome</span>
+                <span>{{fname}} {{lname}}</span>
+            </div>
+            <div class="mb-3" v-if="fields">
+                <span class="text-muted">Áreas de atuação</span>
+                <span>{{fields.join(', ')}}</span>
+            </div>
+            <div class="d-flex justify-content-end">
                 <div v-if="userStore.user.username">
                     <button
                         type="button"
@@ -63,3 +63,9 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+    span {
+        display: block
+    }
+</style>

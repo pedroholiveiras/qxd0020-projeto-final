@@ -3,55 +3,47 @@
     import { type Quote } from "@/types";
     import { citadorService } from "@/api/CitadorService";
 
-    import QuoteCard from "@/components/QuoteCard.vue";
+    import AuthorCard from "@/components/AuthorCard.vue";
     import DelConfirmModal from "@/components/DelConfirmModal.vue";
     import ItemModal from "@/components/ItemModal.vue";
 
     import { useEntityStore, useStateStore } from "@/stores/userStore";
     import { storeToRefs } from "pinia";
 
-    const quotes = storeToRefs(useEntityStore()).quotes;
+    const entityStore = storeToRefs(useEntityStore());
     const stateStore = storeToRefs(useStateStore());
 
     const loading = ref(true);
     const sel = ref(0);
 
     onMounted(async () => {
-        quotes.value = await citadorService.getQuotes();
+        entityStore.authors.value = await citadorService.getAuthors();
     })
 
-    const teste = ref<Quote>({} as Quote);
-
     async function refresh() {
-        quotes.value = quotes.value.filter((m) => m.id != stateStore.sid.value);
+        entityStore.authors.value = entityStore.authors.value.filter((m) => m.id != stateStore.sid.value);
         console.log("refreshado");
-    }
-
-    function authorList(authors) {
-        let res = "";
-
-        if (authors.length > 2) {
-            res += authors[0].attributes.lname + "et al.";
-        } else {
-            for (let i = 0; i < authors.length; ++i) {
-                res += authors[i].attributes.lname
-                if (i != authors.length - 1)
-                    res += "; ";
-            }
-        }
-        return res;
     }
 </script>
 
 <template>
     <div class="row">
         <div class="d-flex">
-            <i class="bi-person-square" style="min-width: 48px; font-size: 32px; margin-right: 8px"></i>
+            <i class="bi-person-square" style="min-width: 48px; font-size: 30px; margin-right: 8px"></i>
             <h1 style="height: 40px">Autores</h1>
         </div>
         <hr>
         <div class="col">
-            <ItemModal></ItemModal>
+            <div v-for="author in entityStore.authors.value" :key="author.id">
+                <AuthorCard
+                    :id="author.id"
+                    :lname="author.attributes.lname"
+                    :fname="author.attributes.fname"
+                    :fields="author.attributes.fields"
+                />
+            </div>
+            <DelConfirmModal @refresh="refresh"/>
+            <ItemModal/>
         </div>
     </div>
 </template>

@@ -43,7 +43,7 @@
 <template>
     <div class="row">
         <div class="d-flex">
-            <i class="bi-chat-left-quote" style="min-width: 48px; font-size: 32px; margin-right: 8px"></i>
+            <i class="bi-chat-left-quote" style="min-width: 48px; font-size: 30px; margin-right: 8px"></i>
             <h1 style="height: 40px">Citações</h1>
         </div>
         <hr>

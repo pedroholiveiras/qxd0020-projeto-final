@@ -30,7 +30,7 @@
                 data-bs-target="#itemModal"
                 v-if="userStore.user.username"
                 @click="stateStore.sact.value = 0; stateStore.stype.value = 0"
-                >Nova citação
+                >Adicionar citação
                 </a>
             </li>
             <li><a
@@ -40,7 +40,17 @@
                 data-bs-target="#itemModal"
                 v-if="userStore.user.username"
                 @click="stateStore.sact.value = 0; stateStore.stype.value = 1"
-                >Nova obra
+                >Adicionar obra
+                </a>
+            </li>
+            <li><a
+                class="dropdown-item"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#itemModal"
+                v-if="userStore.user.username"
+                @click="stateStore.sact.value = 0; stateStore.stype.value = 2"
+                >Adicionar autor
                 </a>
             </li>
             <div v-if="userStore.user.username">

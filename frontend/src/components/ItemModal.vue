@@ -10,7 +10,6 @@
     onMounted(async () => {
         works.value = await citadorService.getWorks();
         authors.value = await citadorService.getAuthors();
-        console.log(authors.value);
     })
 
     const stateStore = storeToRefs(useStateStore());
@@ -39,9 +38,6 @@
         }
     }
 
-    /* ADICIONAR/ATUALIZAR E DEPOIS LIMPAR AUTORES SELECIONADOS!!! */
-    /* ------------------- */
-
     async function newQuote() {
         try {
             await citadorService.newQuote(
@@ -51,7 +47,7 @@
                 userStore.user.id
             );
             quotes.value = await citadorService.getQuotes();
-            console.log("adicionado");
+            console.log("adicionado citação");
         } catch (e) {
             console.log(e);
         }
@@ -67,7 +63,7 @@
                 userStore.user.id
             );
             quotes.value = await citadorService.getQuotes();
-            console.log("atualizado");
+            console.log("atualizado citação");
         } catch (e) {
             console.log(e);
         }
@@ -82,12 +78,13 @@
                 checkedAuthorIds,
                 stateStore.sdata.value.edition,
                 stateStore.sdata.value.year,
+                stateStore.sdata.value.address,
                 stateStore.sdata.value.publisher,
                 stateStore.sdata.value.isbn,
                 userStore.user.id
             );
             works.value = await citadorService.getWorks();
-            console.log("atualizada obra");
+            console.log("adicionado obra");
             checkedAuthorIds = [];
         } catch (e) {
             console.log(e);
@@ -104,13 +101,49 @@
                 checkedAuthorIds,
                 stateStore.sdata.value.edition,
                 stateStore.sdata.value.year,
+                stateStore.sdata.value.address,
                 stateStore.sdata.value.publisher,
                 stateStore.sdata.value.isbn,
                 userStore.user.id
             );
             works.value = await citadorService.getWorks();
-            console.log("atualizado");
+            console.log("atualizado obra");
             checkedAuthorIds = [];
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async function newAuthor() {
+        try {
+            await citadorService.newAuthor(
+                stateStore.sdata.value.fname,
+                stateStore.sdata.value.lname,
+                stateStore.sdata.value.fields.split(', '),
+                userStore.user.id
+            );
+            authors.value = await citadorService.getAuthors();
+            console.log("adicionado autor");
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async function updateAuthor() {
+        try {
+            if (stateStore.sdata.value.fields.length > 1) {
+                stateStore.sdata.value.fields = stateStore.sdata.value.fields.split(', ');
+            }
+
+            await citadorService.updateAuthor(
+                stateStore.sid.value,
+                stateStore.sdata.value.fname,
+                stateStore.sdata.value.lname,
+                stateStore.sdata.value.fields,
+                userStore.user.id
+            );
+            authors.value = await citadorService.getAuthors();
+            console.log("atualizado autor");
         } catch (e) {
             console.log(e);
         }
@@ -125,6 +158,10 @@
             newWork();
         } else if (act == 1 && ent == 1) {
             updateWork();
+        } else if (act == 0 && ent == 2) {
+            newAuthor();
+        } else if (act == 1 && ent == 2) {
+            updateAuthor();
         }
 
         resetFields();
@@ -201,6 +238,10 @@
                             <input v-model="stateStore.sdata.value.year" type="number" class="form-control" id="workEdition">
                         </div>
                         <div class="mb-3">
+                            <label for="workAddress" class="form-label">Local</label>
+                            <input v-model="stateStore.sdata.value.address" type="text" class="form-control" id="workAddress">
+                        </div>
+                        <div class="mb-3">
                             <label for="workPublisher" class="form-label">Editora</label>
                             <input v-model="stateStore.sdata.value.publisher" type="text" class="form-control" id="workPublisher">
                         </div>
@@ -208,13 +249,25 @@
                             <label for="workISBN" class="form-label">ISBN</label>
                             <input v-model="stateStore.sdata.value.isbn" type="text" class="form-control" id="workISBN">
                         </div>
-
                     </form>
                 </div>
 
                 <!-- formulário p/ autor -->
                 <div class="modal-body" v-if="stateStore.stype.value == 2">
-                    <h1>teste 123</h1>
+                    <form action="">
+                        <div class="mb-3">
+                            <label for="authorFname" class="form-label">Nome</label>
+                            <input placeholder="Joaquim Maria" v-model="stateStore.sdata.value.fname" type="text" class="form-control" id="authorFname">
+                        </div>
+                        <div class="mb-3">
+                            <label for="authorFname" class="form-label">Sobrenome</label>
+                            <input placeholder="Machado de Assis" v-model="stateStore.sdata.value.lname" type="text" class="form-control" id="authorFname">
+                        </div>
+                        <div class="mb-3">
+                            <label for="authorFname" class="form-label">Áreas de atuação</label>
+                            <input placeholder="Escritor, Jornalista, Contista" v-model="stateStore.sdata.value.fields" type="text" class="form-control" id="authorFname">
+                        </div>
+                    </form>
                 </div>
 
                 <div class="modal-footer">
@@ -225,5 +278,5 @@
             </div>
         </div>
     </div>
-
 </template>
+
