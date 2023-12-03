@@ -447,6 +447,7 @@ export interface ApiWorkWork extends Schema.CollectionType {
     singularName: 'work';
     pluralName: 'works';
     displayName: 'Work';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -459,7 +460,6 @@ export interface ApiWorkWork extends Schema.CollectionType {
     address: Attribute.String;
     edition: Attribute.Integer;
     isbn: Attribute.UID;
-    subjects: Attribute.JSON;
     authors: Attribute.Relation<
       'api::work.work',
       'manyToMany',

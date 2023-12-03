@@ -10,17 +10,20 @@
     const loading = ref(true);
     const error = ref("");
     const feedback = ref("");
-    const state = storeToRefs(useStateStore());
+    const stateStore = storeToRefs(useStateStore());
 
     const emit = defineEmits(['refresh']);
     
     async function remove() {
         try {
-            console.log(`removido ${state.sitem.value}`);
-            console.log(typeof(state.sitem.value))
-            const res = await citadorService.delete(state.sitem.value);
+            if (stateStore.stype.value == 0) {
+                await citadorService.deleteQuote(stateStore.sid.value);
+            } else if (stateStore.stype.value == 1) {
+                await citadorService.deleteWork(stateStore.sid.value);
+            }
+            console.log(`removido ${stateStore.sid.value}`);
         } catch (e) {
-//            console.log(e);
+            console.log(e);
             if(e instanceof Error)
                 error.value = e.message;
         }

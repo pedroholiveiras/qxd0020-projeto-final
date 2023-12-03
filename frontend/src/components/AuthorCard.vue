@@ -1,10 +1,9 @@
 <script setup lang="ts">
-    import { useUserStore, useStateStore, useSelStore } from "@/stores/userStore";
+    import { useUserStore, useStateStore } from "@/stores/userStore";
     import { storeToRefs } from "pinia";
 
     const userStore = useUserStore();
-    const state = storeToRefs(useStateStore());
-    const sel = storeToRefs(useSelStore());
+    const stateStore = storeToRefs(useStateStore());
 
     const props = defineProps<{
         id: number,
@@ -15,23 +14,20 @@
         year: number
     }>();
 
-    function selId(){
-        state.action.value = 1;
-        state.stype.value = 0;
-        state.sitem.value = props.id;
+    function select(){
+        stateStore.sact.value = 1;
+        stateStore.stype.value = 0;
+        stateStore.sid.value = props.id;
     }
 
     function edit() {
-        selId();
-        const selItem = {
+        select();
+        stateStore.sdata.value = {
             id: props.id,
             content: props.content,
             page: props.page,
             work: props.work
         };
-
-        sel.sel.value = selItem;
-        console.log(sel.sel.value);
     }
 </script>
 
@@ -41,7 +37,7 @@
             <p class="card-text">{{ content }}</p>
             <h6 class="card-subtitle mb-3 text-muted">({{ author }}, {{ year }})</h6>
             <div class="d-flex">
-                <div class="me-auto">
+                <div class="me-auto" >
                     <a href="#" class="btn btn-primary me-2">ABNT</a>
                     <a href="#" class="btn btn-primary">bibLaTeX</a>
                 </div>
@@ -59,7 +55,7 @@
                         class="btn btn-primary"
                         data-bs-toggle="modal"
                         data-bs-target="#delConfirmModal"
-                        @click="selId"
+                        @click="select"
                         ><i class="bi-trash"></i>
                     </button> 
                 </div>
@@ -67,9 +63,3 @@
         </div>
     </div>
 </template>
-
-<style scoped>
-    .btn {
-        color: white;
-    }
-</style>

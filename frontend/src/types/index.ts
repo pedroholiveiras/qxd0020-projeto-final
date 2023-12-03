@@ -14,6 +14,13 @@ export type Work = {
     subtitle: string
 }
 
+export type Author = {
+    id: number,
+    lname: string,
+    fname: string,
+    fields: object
+}
+
 export type User = {
     jwt: string,
     id: number,

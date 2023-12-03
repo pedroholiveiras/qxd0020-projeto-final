@@ -38,11 +38,6 @@ class CitadorSevice {
         return data.data.reverse();
     }
 
-    async getWorks(page = 1, pageSize = 24): Promise<Work[]> {
-        const { data } = await api.get("/works");
-        return data.data;
-    }
-
     async newQuote(content: string, page: number, work: number, userid: number): Promise<Quote> {
         const userStore = useUserStore();
         
@@ -85,13 +80,96 @@ class CitadorSevice {
         return data.data;
     }
 
-    async delete(id: number): Promise<Quote> {
+    async deleteQuote(id: number): Promise<Quote> {
         const userStore = useUserStore();
         const { data } = await api.delete(`/quotes/${id}`, {
             headers : {
                 Authorization: `Bearer ${userStore.token}`
             }
         });
+        return data.data;
+    }
+
+    async getWorks(page = 1, pageSize = 24): Promise<Work[]> {
+        const { data } = await api.get("/works", {
+            params: {
+                populate: ["authors"]
+            }
+        });
+        return data.data.reverse();
+    }
+
+    async newWork(title: string, subtitle: string, authors: object, edition: number, year: number, publisher: string, isbn: string, userid: number): Promise<Quote> {
+        const userStore = useUserStore();
+        
+        const { data } = await api.post('/works',
+            {
+                data: {
+                    title: title,
+                    subtitle: subtitle,
+                    authors: authors,
+                    edition: edition,
+                    year: year,
+                    publisher: publisher,
+                    isbn: isbn,
+                    users_permissions_user: userid
+                }
+            }, 
+            {
+                headers : {
+                    Authorization: `Bearer ${userStore.token}`
+                }
+            }
+        )
+        return data.data;
+    }
+
+    async updateWork(id: number, title: string, subtitle: string, authors: object, edition: number, year: number, publisher: string, isbn: string, userid: number): Promise<Work> {
+        const userStore = useUserStore();
+        
+        const { data } = await api.put(`/works/${id}`,
+            {
+                data: {
+                    title: title,
+                    subtitle: subtitle,
+                    authors: authors,
+                    edition: edition,
+                    year: year,
+                    publisher: publisher,
+                    isbn: isbn,
+                    users_permissions_user: userid
+                }
+            }, 
+            {
+                headers : {
+                    Authorization: `Bearer ${userStore.token}`
+                }
+            }
+        )
+        return data.data;
+    }
+
+    async deleteWork(id: number): Promise<Work> {
+        const userStore = useUserStore();
+        const { data } = await api.delete(`/works/${id}`, {
+            headers : {
+                Authorization: `Bearer ${userStore.token}`
+            }
+        });
+        return data.data;
+    }
+
+    async getWorks(page = 1, pageSize = 24): Promise<Work[]> {
+        const { data } = await api.get("/works", {
+            params: {
+                populate: ["authors"]
+            }
+        });
+        return data.data.reverse();
+    }
+
+    async getAuthors(page = 1, pageSize = 24): Promise<Work[]> {
+        const { data } = await api.get("/authors");
         return data.data;
     }
 }

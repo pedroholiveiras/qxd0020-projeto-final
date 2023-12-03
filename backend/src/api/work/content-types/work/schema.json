@@ -4,7 +4,8 @@
   "info": {
     "singularName": "work",
     "pluralName": "works",
-    "displayName": "Work"
+    "displayName": "Work",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -34,9 +35,6 @@
     },
     "isbn": {
       "type": "uid"
-    },
-    "subjects": {
-      "type": "json"
     },
     "authors": {
       "type": "relation",

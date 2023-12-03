@@ -1,10 +1,21 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomePage from "@/pages/HomePage.vue";
+import HomeQuotes from "@/pages/HomeQuotes.vue";
+import HomeWorks from "@/pages/HomeWorks.vue";
+import HomeAuthors from "@/pages/HomeAuthors.vue";
 
 const routes = [
     {
-        path: "/citacoes",
-        component: HomePage
+        path: "/",
+        alias: "/citacoes",
+        component: HomeQuotes
+    },
+    {
+        path: "/obras",
+        component: HomeWorks
+    },
+    {
+        path: "/autores",
+        component: HomeAuthors
     },
 ]
 

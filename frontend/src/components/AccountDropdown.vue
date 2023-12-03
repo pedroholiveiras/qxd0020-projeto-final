@@ -1,16 +1,11 @@
 <script setup lang="ts">
     import ItemModal from "@/components/ItemModal.vue";
     import AccountModal from "@/components/AccountModal.vue";
-    import { useUserStore } from "@/stores/userStore";
+    import { useUserStore, useStateStore } from "@/stores/userStore";
+    import { storeToRefs } from "pinia";
 
     const userStore = useUserStore();
-    
-    /* -------- */
-
-    import { storeToRefs } from "pinia";
-    import { useStateStore } from "@/stores/userStore";
-
-    const state = storeToRefs(useStateStore());
+    const stateStore = storeToRefs(useStateStore());
 </script>
 
 <template>
@@ -19,15 +14,33 @@
             Conta
         </button>
         <ul class="dropdown-menu dropdown-menu-md-end shadow-sm">
-            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#accountModal" v-if="!userStore.user.username">Entrar</a></li>
+            <li><a
+                class="dropdown-item"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#accountModal"
+                v-if="!userStore.user.username"
+                >Entrar
+                </a>
+            </li>
             <li><a
                 class="dropdown-item"
                 href="#"
                 data-bs-toggle="modal"
                 data-bs-target="#itemModal"
                 v-if="userStore.user.username"
-                @click="state.action.value = 0; state.stype.value = 0"
+                @click="stateStore.sact.value = 0; stateStore.stype.value = 0"
                 >Nova citação
+                </a>
+            </li>
+            <li><a
+                class="dropdown-item"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#itemModal"
+                v-if="userStore.user.username"
+                @click="stateStore.sact.value = 0; stateStore.stype.value = 1"
+                >Nova obra
                 </a>
             </li>
             <div v-if="userStore.user.username">

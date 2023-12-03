@@ -2,6 +2,8 @@ import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import { type User } from "@/types";
 import { type Quote } from "@/types";
+import { type Work } from "@/types";
+import { type Author } from "@/types";
 import { citadorService } from "@/api/CitadorService";
 
 export const useUserStore = defineStore("user", () => {
@@ -16,26 +18,28 @@ export const useUserStore = defineStore("user", () => {
     return { user, token, logout }
 });
 
-export const useQuoteStore = defineStore("quote", () => {
+export const useEntityStore = defineStore("quote", () => {
     const quotes = ref<Quote[]>([]);
+    const works = ref<Work[]>([]);
+    const authors = ref<Author[]>([]);
 
     async function getQuotes() {
         quotes.value = await citadorService.getQuotes();
     }
 
-    return { quotes, getQuotes };
+    async function getWorks() {
+        works.value = await citadorService.getWorks();
+    }
+
+    return { quotes, getQuotes, works, authors };
 });
 
 export const useStateStore = defineStore("state", () => {
-    const action = ref(0);
-    const stype = ref(0);
-    const sitem = ref(0);
-
-    return { action, stype, sitem };
-})
-
-export const useSelStore = defineStore("sel", () => {
-    const sel = ref({});
-
-    return { sel };
-})
+    return {
+        sact: ref(0),
+        stype: ref(0),
+        sid: ref(0),
+        sdata: ref({}),
+        sauthor: ref({})
+    };
+});

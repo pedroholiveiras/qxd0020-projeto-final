@@ -2,18 +2,17 @@
     import { ref, onMounted } from "vue";
     import { type Quote } from "@/types";
     import { citadorService } from "@/api/CitadorService";
-    import Card from "@/components/Card.vue";
+
+    import QuoteCard from "@/components/QuoteCard.vue";
     import DelConfirmModal from "@/components/DelConfirmModal.vue";
     import ItemModal from "@/components/ItemModal.vue";
-    import { useQuoteStore, useStateStore } from "@/stores/userStore";
+
+    import { useEntityStore, useStateStore } from "@/stores/userStore";
     import { storeToRefs } from "pinia";
 
-    const quotes = storeToRefs(useQuoteStore()).quotes;
-    const state = storeToRefs(useStateStore());
-
-    const loading = ref(true);
-    const sel = ref(0);
-
+    const stateStore = storeToRefs(useStateStore());
+    const quotes = storeToRefs(useEntityStore()).quotes;
+    
     onMounted(async () => {
         quotes.value = await citadorService.getQuotes();
     })
@@ -21,7 +20,7 @@
     const teste = ref<Quote>({} as Quote);
 
     async function refresh() {
-        quotes.value = quotes.value.filter((m) => m.id != state.sitem.value);
+        quotes.value = quotes.value.filter((m) => m.id != stateStore.sid.value);
         console.log("refreshado");
     }
 
@@ -43,9 +42,14 @@
 
 <template>
     <div class="row">
+        <div class="d-flex">
+            <i class="bi-chat-left-quote" style="min-width: 48px; font-size: 32px; margin-right: 8px"></i>
+            <h1 style="height: 40px">Citações</h1>
+        </div>
+        <hr>
         <div class="col">
             <div v-for="quote in quotes" :key="quote.id">
-                <Card
+                <QuoteCard
                     :id="quote.id"
                     :content="quote.attributes.content"
                     :page="quote.attributes.page"
@@ -53,10 +57,10 @@
                     :author="authorList(quote.attributes.work.data.attributes.authors.data)"
                     :year="quote.attributes.work.data.attributes.year"
                     @click="sel == id"
-                ></Card>
-                <DelConfirmModal @refresh="refresh"></DelConfirmModal>
+                    />
             </div>
-            <ItemModal></ItemModal>
+            <DelConfirmModal @refresh="refresh"/>
+            <ItemModal/>
         </div>
     </div>
 </template>

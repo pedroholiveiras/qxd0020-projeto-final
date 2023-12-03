@@ -23,15 +23,20 @@
             }
         }
     }
+
+    function resetFields() {
+        email.value = "";
+        password.value = "";
+    }    
 </script>
 
 <template>
-    <div class="modal" id="accountModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="accountModalLabel" aria-hidden="true">
+    <div class="modal" id="accountModal" data-bs-keyboard="true" tabindex="-1" aria-labelledby="accountModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Entrar</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button @click="resetFields()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div v-if="errorMessage"  class="alert alert-danger" role="alert">
