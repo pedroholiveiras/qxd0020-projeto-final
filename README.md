@@ -21,7 +21,7 @@ Pedro Henrique Pereira de Oliveira, 494399, Design Digital
 ## Principais funcionalidades da aplicação
 
 - **Usuário autenticado** pode _criar_, _listar_, _atualizar_ e _remover_ e ver detalhes de **citações**, **obras** e **autores**
-- **Usuário** não autenticado pode _listar_ e ver detalhes **citações**, **obras** e **autores**
+- **Usuário** não autenticado pode _listar_ e ver detalhes de **citações**, **obras** e **autores**
 
 ## Tecnologias e frameworks utilizados
 
