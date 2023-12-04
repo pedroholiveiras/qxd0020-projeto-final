@@ -1,12 +1,12 @@
-# :checkered_flag: Citador
+#  Citador
 
 Um sistema de gerenciamento de citações
 
-## :technologist: Membros da equipe
+##  Membros da equipe
 
 Pedro Henrique Pereira de Oliveira, 494399, Design Digital
 
-## :people_holding_hands: Papéis ou tipos de usuário da aplicação
+##  Papéis ou tipos de usuário da aplicação
 
 - Usuário não registrado
 - Usuário registrado
@@ -26,10 +26,8 @@ Pedro Henrique Pereira de Oliveira, 494399, Design Digital
 ## :triangular_flag_on_post: Principais funcionalidades da aplicação
 
 - **Administrador** pode _criar_, _listar_, _atualizar_ e _remover_ **autores**, **obras** e **citações**
-- **Usuário** registrado pode _criar_, _listar_, _atualizar_ e _remover_ suas **citações**
-- **Usuário** registrado pode _listar_ **citações** públicas, **autores**, e **obras**
-- **Usuário** registrado pode _solicitar adição_ de **autores** e **obras**
-- **Usuário** não registrado pode _listar_ **citações** públicas, **autores**, e **obras**
+- **Usuário** registrado pode _listar_ e ver detalhes de **autores**, **obras** e **citações**
+- **Usuário** não registrado pode _listar_ **citações**
 
 ----
 
@@ -41,21 +39,23 @@ Pedro Henrique Pereira de Oliveira, 494399, Design Digital
 
 **Frontend:**
 
-Lista as tecnologias, frameworks e bibliotecas utilizados.
+- VueJS v3.0, Vue-Router e Pinia.
+- Axios
 
 **Backend:**
 
-Lista as tecnologias, frameworks e bibliotecas utilizados.
+- Strapi
 
 
 ## :shipit: Operações implementadas para cada entidade da aplicação
 
 
-| Entidade| Criação | Leitura | Atualização | Remoção |
+| Entidade | Criação | Leitura | Atualização | Remoção |
 | --- | --- | --- | --- | --- |
-| Entidade 1 | X |  X  |  | X |
-| Entidade 2 | X |    |  X | X |
-| Entidade 3 | X |    |  |  |
+| Usuário |  | |  |  |
+| Citação | X | X | X | X |
+| Obra | X | X | X | X |
+| Autor | X | X | X | X |
 
 > Lembre-se que é necessário implementar o CRUD de pelo menos duas entidades.
 
@@ -63,5 +63,8 @@ Lista as tecnologias, frameworks e bibliotecas utilizados.
 
 | Método HTTP | URL |
 | --- | --- |
-| GET | api/entidade1/|
-| POST | api/entidade2 |
+| POST | /auth/local |
+| GET | /users/me/|
+| GET / POST | /api/quotes |
+| GET / POST | /api/works |
+| GET / POST | /api/authors |
