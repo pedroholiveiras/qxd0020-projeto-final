@@ -24,20 +24,6 @@
         console.log("refreshado");
     }
 
-    function authorList(authors) {
-        let res = "";
-
-        if (authors.length > 2) {
-            res += authors[0].attributes.lname + "et al.";
-        } else {
-            for (let i = 0; i < authors.length; ++i) {
-                res += authors[i].attributes.lname
-                if (i != authors.length - 1)
-                    res += "; ";
-            }
-        }
-        return res;
-    }
 </script>
 
 <template>
@@ -53,10 +39,11 @@
                     :id="quote.id"
                     :content="quote.attributes.content"
                     :page="quote.attributes.page"
-                    :work="quote.attributes.work.data.id"
-                    :author="authorList(quote.attributes.work.data.attributes.authors.data)"
+                    :workid="quote.attributes.work.data.id"
+                    :worktitle="quote.attributes.work.data.attributes.title"
+                    :author="quote.attributes.work.data.attributes.authors.data"
                     :year="quote.attributes.work.data.attributes.year"
-                    @click="sel == id"
+                    :uid="quote.attributes.users_permissions_user"
                     />
             </div>
             <DelConfirmModal @refresh="refresh"/>

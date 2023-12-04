@@ -22,20 +22,6 @@
         console.log("refreshado");
     }
 
-    function authorList(authors) {
-        let res = "";
-
-        if (authors.length > 2) {
-            res += authors[0].attributes.lname + "et al.";
-        } else {
-            for (let i = 0; i < authors.length; ++i) {
-                res += authors[i].attributes.lname
-                if (i != authors.length - 1)
-                    res += "; ";
-            }
-        }
-        return res;
-    }
 </script>
 
 <template>
@@ -51,7 +37,7 @@
                     :id="work.id" 
                     :title="work.attributes.title"
                     :subtitle="work.attributes.subtitle"
-                    :author="authorList(work.attributes.authors.data)"
+                    :author="work.attributes.authors.data"
                     :edition="work.attributes.edition"
                     :year="work.attributes.year"
                     :publisher="work.attributes.publisher"

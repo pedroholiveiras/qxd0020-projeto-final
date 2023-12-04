@@ -416,7 +416,7 @@ export interface ApiQuoteQuote extends Schema.CollectionType {
       Attribute.SetMinMaxLength<{
         maxLength: 512;
       }>;
-    page: Attribute.Integer;
+    page: Attribute.Integer & Attribute.Required;
     work: Attribute.Relation<'api::quote.quote', 'manyToOne', 'api::work.work'>;
     users_permissions_user: Attribute.Relation<
       'api::quote.quote',

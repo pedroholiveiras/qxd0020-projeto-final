@@ -1,5 +1,7 @@
 <script setup lang="ts">
-    import { useUserStore, useStateStore } from "@/stores/userStore";
+    import ItemDetailsModal from "@/components/ItemDetailsModal.vue"
+    import { citadorService } from "@/api/CitadorService";
+    import { useUserStore, useStateStore  } from "@/stores/userStore";
     import { storeToRefs } from "pinia";
 
     const userStore = useUserStore();
@@ -12,19 +14,28 @@
         fields?: object
     }>();
 
-    function select(){
+    function workList(works) {
+        const res = [];
+
+        for (const work of works)
+            res.push(work.attributes.title);
+
+        return res;            
+    }
+
+    async function select() {
         stateStore.sact.value = 1;
         stateStore.stype.value = 2;
         stateStore.sid.value = props.id;
-    }
 
-    function edit() {
-        select();
+        const author = await citadorService.getAuthor(props.id);
+
         stateStore.sdata.value = {
             id: props.id,
             fname: props.fname,
             lname: props.lname,
-            fields: props.fields
+            fields: props.fields,
+            works: workList(author.attributes.works.data)
         };
     }
 </script>
@@ -41,13 +52,21 @@
                 <span>{{fields.join(', ')}}</span>
             </div>
             <div class="d-flex justify-content-end">
-                <div v-if="userStore.user.username">
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#itemDetailsModal"
+                    @click="select"
+                    ><i class="bi-eye"/>
+                </button>
+                <div v-if="userStore.user.role == 'admin'">
                     <button
                         type="button"
-                        class="btn btn-primary me-2"
+                        class="btn btn-primary mx-2"
                         data-bs-toggle="modal"
                         data-bs-target="#itemModal"
-                        @click="edit"
+                        @click="select"
                         ><i class="bi-pencil"></i>
                     </button> 
                     <button
@@ -62,6 +81,7 @@
             </div>
         </div>
     </div>
+    <ItemDetailsModal></ItemDetailsModal>
 </template>
 
 <style scoped>

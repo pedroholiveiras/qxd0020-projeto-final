@@ -22,6 +22,7 @@ export const useEntityStore = defineStore("quote", () => {
     const quotes = ref<Quote[]>([]);
     const works = ref<Work[]>([]);
     const authors = ref<Author[]>([]);
+    const author = ref<Author>({} as Author);
 
     async function getQuotes() {
         quotes.value = await citadorService.getQuotes();

@@ -162,6 +162,14 @@ class CitadorSevice {
         return data.data;
     }
 
+    async getAuthor(id: number): Promise<Author> {
+        const { data } = await api.get(`/authors/${id}`, {
+            params: {
+                populate: ["works"],
+            }
+        })
+        return data.data
+    }
 
     async getAuthors(page = 1, pageSize = 24): Promise<Work[]> {
         const { data } = await api.get("/authors");

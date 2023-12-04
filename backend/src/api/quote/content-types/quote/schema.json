@@ -18,7 +18,8 @@
       "maxLength": 512
     },
     "page": {
-      "type": "integer"
+      "type": "integer",
+      "required": true
     },
     "work": {
       "type": "relation",

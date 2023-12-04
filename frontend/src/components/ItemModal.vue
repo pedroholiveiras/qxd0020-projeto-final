@@ -23,10 +23,7 @@
 
     const actions = ["Adicionar", "Atualizar"];
     const types = ["citação", "obra", "autor"];
-
-    /* ------------------- */
     
-
     const checkedAuthors = ref([]);
     let checkedAuthorIds = [];
 
@@ -197,7 +194,7 @@
                         </div>
 
                         <label class="mb-2" for="quoteWork">Escolha uma obra</label>
-                        <select v-model="stateStore.sdata.value.work" class="form-select mb-2" id="quoteWork" aria-label="Escolher obra">
+                        <select v-model="stateStore.sdata.work" class="form-select mb-2" id="quoteWork" aria-label="Escolher obra">
                             <option v-for="work in works" :key="work.id" v-bind:value="work.id">
                                 {{work.attributes.title}}
                             </option>
@@ -265,7 +262,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="authorFname" class="form-label">Áreas de atuação</label>
-                            <input placeholder="Escritor, Jornalista, Contista" v-model="stateStore.sdata.value.fields" type="text" class="form-control" id="authorFname">
+                            <input placeholder="Jornalismo, Literatura" v-model="stateStore.sdata.value.fields" type="text" class="form-control" id="authorFname">
                         </div>
                     </form>
                 </div>
