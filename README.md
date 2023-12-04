@@ -8,9 +8,8 @@ Pedro Henrique Pereira de Oliveira, 494399, Design Digital
 
 ## Papéis ou tipos de usuário da aplicação
 
-- Usuário não registrado
-- Usuário registrado
-- Administrador
+- Usuário autenticado
+- Usuário não autenticado
 
 ## Entidades ou tabelas do sistema
 
@@ -21,9 +20,8 @@ Pedro Henrique Pereira de Oliveira, 494399, Design Digital
 
 ## Principais funcionalidades da aplicação
 
-- **Administrador** pode _criar_, _listar_, _atualizar_ e _remover_ **citações**, **obras** e **autores**
-- **Usuário** registrado pode _listar_ e ver detalhes de **citações**, **obras** e **autores**
-- **Usuário** não registrado pode _listar_ **citações**, **obras** e **autores**
+- **Usuário** não autenticado pode _listar_ e ver detalhes **citações**, **obras** e **autores**
+- **Usuário autenticado** pode _criar_, _listar_, _atualizar_ e _remover_ e ver detalhes de **citações**, **obras** e **autores**
 
 ## Tecnologias e frameworks utilizados
 
@@ -69,6 +67,4 @@ Pedro Henrique Pereira de Oliveira, 494399, Design Digital
 
 ## Informações de acesso
 
-- fulano@mail.com, fulano123 (conta normal)
-- admin@admin.com, admin123 (conta admin)
-- admin@admin.com, Admin123 (Strapi)
+- admin@admin.com, Admin123 (Strapi também)
