@@ -40,6 +40,7 @@
                     :lname="author.attributes.lname"
                     :fname="author.attributes.fname"
                     :fields="author.attributes.fields"
+                    :works="author.attributes.works.data"
                 />
             </div>
             <DelConfirmModal @refresh="refresh"/>

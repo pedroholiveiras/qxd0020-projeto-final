@@ -11,7 +11,8 @@
         id: number,
         fname: string,
         lname?: string,
-        fields?: object
+        fields?: object,
+        works?: object
     }>();
 
     function workList(works) {
@@ -19,7 +20,6 @@
 
         for (const work of works)
             res.push(work.attributes.title);
-
         return res;            
     }
 
@@ -28,14 +28,12 @@
         stateStore.stype.value = 2;
         stateStore.sid.value = props.id;
 
-        const author = await citadorService.getAuthor(props.id);
-
         stateStore.sdata.value = {
             id: props.id,
             fname: props.fname,
             lname: props.lname,
             fields: props.fields,
-            works: workList(author.attributes.works.data)
+            works: workList(props.works)
         };
     }
 </script>

@@ -27,8 +27,10 @@
                         <span class="ms-4">{{ stateStore.sdata.value.worktitle }}</span>
                     </div>
                     <div class="mb-3">
-                        <span class="text-muted">Autor(es)</span>
-                        <span class="ms-4">{{ stateStore.sdata.value.author }}</span>
+                        <span class="text-muted">Autor</span>
+                        <div v-for="author in stateStore.sdata.value.author">
+                            <span class="ms-4">{{ author }}</span>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-body" v-if="stateStore.stype.value == 1">
@@ -76,8 +78,8 @@
                         <span class="text-muted">Áreas de atuação</span>
                         <span class="ms-4">{{ stateStore.sdata.value.fields.join(', ') }}</span>
                     </div>
-                    <div class="mb-3">
-                        <span class="text-muted" v-if="stateStore.sdata.value.works.length > 0">Obras</span>
+                    <div class="mb-3" v-if="stateStore.sdata.value.works.length > 0">
+                        <span class="text-muted">Obras</span>
                         <div v-for="work in stateStore.sdata.value.works">
                             <span class="ms-4">{{ work }}</span>
                         </div>
