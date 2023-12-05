@@ -78,9 +78,9 @@
                         <span class="text-muted">Nome</span>
                         <span class="ms-4">{{ stateStore.sdata.value.fname }} {{ stateStore.sdata.value.lname }}</span>
                     </div>
-                    <div class="mb-3" v-if="stateStore.sdata.value.fields">
+                    <div class="mb-3" v-if="stateStore.sdata.value.fields && stateStore.sdata.value.fields.length > 0">
                         <span class="text-muted">Áreas</span>
-                        <span class="ms-4 br">{{ stateStore.sdata.value.fields }} </span>
+                        <span class="ms-4 br">{{ stateStore.sdata.value.fields.join('\n') }} </span>
                     </div>
                     <div class="mb-3" v-if="stateStore.sdata.value.works && stateStore.sdata.value.works.length > 0">
                         <span class="text-muted">Obras</span>

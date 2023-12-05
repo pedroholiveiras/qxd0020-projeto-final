@@ -65,15 +65,15 @@
         if (authors.length == 0) {
             return "Anônimo.";
         } else if (authors.length > 2) {
-            res += authors[0].attributes.lname + " et al.";
+            res += authors[0].attributes.lname + " et al";
         } else {
             for (let i = 0; i < authors.length; ++i) {
-                res += authors[i].attributes.lname + '.';
+                res += authors[i].attributes.lname;
                 if (i != authors.length - 1)
                     res += "; ";
             }
         }
-        return res;
+        return res + '.';
     }
 </script>
 

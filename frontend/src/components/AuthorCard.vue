@@ -35,7 +35,7 @@
             id: props.id,
             fname: props.fname,
             lname: props.lname,
-            fields: props.fields.join(', '),
+            fields: props.fields,
             works: workList(props.works)
         };
     }
