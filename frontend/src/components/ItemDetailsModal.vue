@@ -2,16 +2,20 @@
     import { useStateStore } from "@/stores/userStore";
     import { storeToRefs } from "pinia";
 
+    function resetFields() {
+        stateStore.sdata.value = {};
+    }
+
     const stateStore = storeToRefs(useStateStore());
 </script>
 
 <template>
-    <div class="modal" id="itemDetailsModal" tabindex="-1" aria-labelledby="itemDetailsModalLabel" aria-hidden="true">
+    <div class="modal" id="itemDetailsModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="itemDetailsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="itemDetailsModalLabel">Detalhes</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="resetFields"></button>
                 </div>
                 <div class="modal-body" v-if="stateStore.stype.value == 0">
                     <div class="mb-3">
@@ -74,15 +78,13 @@
                         <span class="text-muted">Nome</span>
                         <span class="ms-4">{{ stateStore.sdata.value.fname }} {{ stateStore.sdata.value.lname }}</span>
                     </div>
-                    <div class="mb-3">
-                        <span class="text-muted">Áreas de atuação</span>
-                        <span class="ms-4">{{ stateStore.sdata.value.fields.join(', ') }}</span>
+                    <div class="mb-3" v-if="stateStore.sdata.value.fields">
+                        <span class="text-muted">Áreas</span>
+                        <span class="ms-4 br">{{ stateStore.sdata.value.fields }} </span>
                     </div>
-                    <div class="mb-3" v-if="stateStore.sdata.value.works.length > 0">
+                    <div class="mb-3" v-if="stateStore.sdata.value.works && stateStore.sdata.value.works.length > 0">
                         <span class="text-muted">Obras</span>
-                        <div v-for="work in stateStore.sdata.value.works">
-                            <span class="ms-4">{{ work }}</span>
-                        </div>
+                        <span class="ms-4 br">{{ stateStore.sdata.value.works.join('\n') }} </span>
                     </div>
                 </div>
             </div>
@@ -93,5 +95,9 @@
 <style scoped>
     span {
         display: block
+    }
+
+    .br {
+        white-space: pre;
     }
 </style>

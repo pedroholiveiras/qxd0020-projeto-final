@@ -10,7 +10,7 @@
         id: number,
         content: string,
         page: number,
-        workid: number,
+        workid?: number,
         worktitle: string,
         author: Array,
         year: number,
@@ -45,7 +45,7 @@
         let res = "";
 
         if (authors.length > 2) {
-            res += authors[0].attributes.lname + "et al.";
+            res += authors[0].attributes.lname + " et al.";
         } else {
             for (let i = 0; i < authors.length; ++i) {
                 res += authors[i].attributes.lname
@@ -58,13 +58,12 @@
 </script>
 
 <template>
-    <div class="card col-md-10 mx-auto mb-2" @click="console.log(userStore.user.role)">
+    <div class="card col-md-10 mx-auto mb-2">
         <div class="card-body">
             <p class="card-text">{{ content }}</p>
             <h6 class="card-subtitle mb-3 text-muted">({{ authorRef(author) }}, {{ year }})</h6>
             <div class="d-flex justify-content-end">
                 <button
-                    v-if="userStore.user.username"
                     type="button"
                     class="btn btn-primary"
                     data-bs-toggle="modal"

@@ -1,18 +1,19 @@
 <script setup lang="ts">
     import ItemDetailsModal from "@/components/ItemDetailsModal.vue"
     import { citadorService } from "@/api/CitadorService";
-    import { useUserStore, useStateStore  } from "@/stores/userStore";
+    import { useUserStore, useStateStore, useEntityStore } from "@/stores/userStore";
     import { storeToRefs } from "pinia";
 
     const userStore = useUserStore();
     const stateStore = storeToRefs(useStateStore());
+    const entityStore = storeToRefs(useEntityStore());
 
     const props = defineProps<{
         id: number,
         fname: string,
         lname?: string,
         fields?: object,
-        works?: object
+        works?: object,
     }>();
 
     function workList(works) {
@@ -20,8 +21,10 @@
 
         for (const work of works)
             res.push(work.attributes.title);
+
         return res;            
     }
+
 
     async function select() {
         stateStore.sact.value = 1;
@@ -32,7 +35,7 @@
             id: props.id,
             fname: props.fname,
             lname: props.lname,
-            fields: props.fields,
+            fields: props.fields.join(', '),
             works: workList(props.works)
         };
     }
@@ -46,7 +49,7 @@
                 <span>{{fname}} {{lname}}</span>
             </div>
             <div class="mb-3" v-if="fields">
-                <span class="text-muted">Áreas de atuação</span>
+                <span class="text-muted">Áreas</span>
                 <span>{{fields.join(', ')}}</span>
             </div>
             <div class="d-flex justify-content-end">

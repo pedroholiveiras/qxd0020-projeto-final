@@ -1,10 +1,11 @@
 <script setup lang="ts">
     import ItemDetailsModal from "@/components/ItemDetailsModal.vue"
-    import { useUserStore, useStateStore } from "@/stores/userStore";
+    import { useUserStore, useStateStore, useEntityStore } from "@/stores/userStore";
     import { storeToRefs } from "pinia";
 
     const userStore = useUserStore();
     const stateStore = storeToRefs(useStateStore());
+    const entityStore = storeToRefs(useEntityStore());
 
     const props = defineProps<{
         id: number,
@@ -28,12 +29,25 @@
             title: props.title,
             subtitle: props.subtitle,
             author: authorList(props.author),
+            selauthor: authorId(entityStore.authors.value),
             edition: props.edition,
             year: props.year,
             publisher: props.publisher,
             address: props.address,
             isbn: props.isbn
         };
+    }
+
+    function authorId(authors)
+    {
+        /* [1, 2, 3, 4, 5]
+         * [1, 4]
+         * [t, f, f, t, f]
+         */
+        const allAuthorIds = authors.map(a => a.id);
+        const selAuthorIds = props.author.map(a => a.id);
+
+        return allAuthorIds.map(e => selAuthorIds.includes(e));
     }
 
     function authorList(authors) {
@@ -48,11 +62,13 @@
     function authorRef(authors) {
         let res = "";
 
-        if (authors.length > 2) {
-            res += authors[0].attributes.lname + "et al.";
+        if (authors.length == 0) {
+            return "Anônimo.";
+        } else if (authors.length > 2) {
+            res += authors[0].attributes.lname + " et al.";
         } else {
             for (let i = 0; i < authors.length; ++i) {
-                res += authors[i].attributes.lname
+                res += authors[i].attributes.lname + '.';
                 if (i != authors.length - 1)
                     res += "; ";
             }
@@ -65,7 +81,7 @@
     <div class="card col-md-10 mx-auto mb-2">
         <div class="card-body">
             <div class="mb-4">
-                <span v-if="author">{{ authorRef(author)}}.</span>
+                <span v-if="author">{{ authorRef(author)}}</span>
                 <span v-if="title">&nbsp<i>{{title}}</i></span>
                 <span v-if="subtitle">: {{subtitle}}</span>.
                 <span v-if="edition">{{edition}}ª ed.</span>

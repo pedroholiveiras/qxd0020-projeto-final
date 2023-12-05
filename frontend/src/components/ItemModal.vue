@@ -1,16 +1,41 @@
 <script setup lang="ts">
-    import { ref, onMounted, onBeforeMount } from "vue";
+    import { ref, onMounted, onBeforeMount, computed } from "vue";
     import { type Work } from "@/types";
     import { type Quote } from "@/types";
-    import AuthorSelect from "@/components/AuthorSelect.vue";
     import { citadorService } from "@/api/CitadorService";
     import { useUserStore, useEntityStore, useStateStore } from "@/stores/userStore";
 
     import { storeToRefs } from "pinia";
+    
     onMounted(async () => {
         works.value = await citadorService.getWorks();
         authors.value = await citadorService.getAuthors();
     })
+    
+    function isEmpty() {
+        switch (stateStore.stype.value) {
+            case 0: 
+                return stateStore.sdata.value.content == undefined ||
+                    stateStore.sdata.value.content == "" ||
+                    stateStore.sdata.value.page == undefined ||
+                    stateStore.sdata.value.page == "" ||
+                    stateStore.sdata.value.workid == undefined ||
+                    stateStore.sdata.value.workid == "";
+            case 1:
+                return stateStore.sdata.value.title == undefined ||
+                    stateStore.sdata.value.title == "" ||
+                    !checkedAuthors.value.some(Boolean) ||
+                    stateStore.sdata.value.year == undefined ||
+                    stateStore.sdata.value.year == "" ||
+                    stateStore.sdata.value.publisher == undefined ||
+                    stateStore.sdata.value.publisher == "";
+            case 2:
+                return stateStore.sdata.value.fname == undefined ||
+                    stateStore.sdata.value.fname == "";
+            default:
+                return false
+        }
+    }
 
     const stateStore = storeToRefs(useStateStore());
     const entityStore = useEntityStore();
@@ -40,7 +65,7 @@
             await citadorService.newQuote(
                 stateStore.sdata.value.content,
                 stateStore.sdata.value.page,
-                stateStore.sdata.value.work,
+                stateStore.sdata.value.workid,
                 userStore.user.id
             );
             quotes.value = await citadorService.getQuotes();
@@ -56,7 +81,7 @@
                 stateStore.sid.value,
                 stateStore.sdata.value.content,
                 stateStore.sdata.value.page,
-                stateStore.sdata.value.work,
+                stateStore.sdata.value.workid,
                 userStore.user.id
             );
             quotes.value = await citadorService.getQuotes();
@@ -161,6 +186,7 @@
             updateAuthor();
         }
 
+        checkedAuthors.value = [];
         resetFields();
     }
 
@@ -193,8 +219,8 @@
                             <input v-model="stateStore.sdata.value.page" type="number" class="form-control" id="quotePage">
                         </div>
 
-                        <label class="mb-2" for="quoteWork">Escolha uma obra</label>
-                        <select v-model="stateStore.sdata.work" class="form-select mb-2" id="quoteWork" aria-label="Escolher obra">
+                        <label class="mb-2" for="quoteWork">Obra</label>
+                        <select v-model="stateStore.sdata.value.workid" class="form-select mb-2" id="quoteWork" aria-label="Escolher obra">
                             <option v-for="work in works" :key="work.id" v-bind:value="work.id">
                                 {{work.attributes.title}}
                             </option>
@@ -217,7 +243,7 @@
                             <label for="workAuthor" class="form-label">Autor(es):</label>
                                 <fieldset class="row overflow-x-hidden overflow-y-hidden" style="max-height: 128px">
                                     <div class="col-sm-10" v-for="(author, i) in authors" :key="author.id">
-                                        <div class="form-check">
+                                        <div class="form-check"> <!-- ...stateStore.sdata.value.selauthor[i]? -->
                                             <input v-model="checkedAuthors[i]" class="form-check-input" type="checkbox" name="gridRadios" :id="i" value="option1">
                                             <label class="form-check-label" :for="i">
                                                 {{ author.attributes.fname }} {{ author.attributes.lname }}
@@ -257,20 +283,25 @@
                             <input placeholder="Joaquim Maria" v-model="stateStore.sdata.value.fname" type="text" class="form-control" id="authorFname">
                         </div>
                         <div class="mb-3">
-                            <label for="authorFname" class="form-label">Sobrenome</label>
-                            <input placeholder="Machado de Assis" v-model="stateStore.sdata.value.lname" type="text" class="form-control" id="authorFname">
+                            <label for="authorLname" class="form-label">Sobrenome</label>
+                            <input placeholder="Machado de Assis" v-model="stateStore.sdata.value.lname" type="text" class="form-control" id="authorLname">
                         </div>
                         <div class="mb-3">
-                            <label for="authorFname" class="form-label">Áreas de atuação</label>
-                            <input placeholder="Jornalismo, Literatura" v-model="stateStore.sdata.value.fields" type="text" class="form-control" id="authorFname">
+                            <label for="authorFields" class="form-label">Áreas</label>
+                            <input placeholder="Jornalismo, Literatura" v-model="stateStore.sdata.value.fields" type="text" class="form-control" id="authorFields">
                         </div>
                     </form>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="action(stateStore.sact.value, stateStore.stype.value)">
-                        {{ actions[stateStore.sact.value] }}
-                    </button>
+                    <input
+                        type="submit"
+                        class="btn btn-primary"
+                        data-bs-dismiss="modal"
+                        :value="actions[stateStore.sact.value]"
+                        @click="action(stateStore.sact.value, stateStore.stype.value)"
+                        :disabled="isEmpty()"
+                        > 
                 </div>
             </div>
         </div>

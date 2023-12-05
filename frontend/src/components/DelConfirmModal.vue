@@ -7,8 +7,6 @@
     import { useStateStore } from "@/stores/userStore";
     import { storeToRefs } from "pinia";
 
-    const loading = ref(true);
-    const feedback = ref("");
     const stateStore = storeToRefs(useStateStore());
 
     const emit = defineEmits(['refresh']);
@@ -30,7 +28,7 @@
 </script>
 
 <template>
-    <div class="modal" id="delConfirmModal" tabindex="-1" aria-labelledby="delConfirmModalLabel" aria-hidden="true">
+    <div class="modal" id="delConfirmModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delConfirmModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
