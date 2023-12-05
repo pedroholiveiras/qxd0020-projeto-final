@@ -19,7 +19,8 @@
                 await citadorService.deleteWork(stateStore.sid.value);
             } else if (stateStore.stype.value == 2) {
                 await citadorService.deleteAuthor(stateStore.sid.value);
-            }  
+            }
+            stateStore.sdata.value = [];
             console.log("removido");
         } catch (e) {
             console.log(e);
